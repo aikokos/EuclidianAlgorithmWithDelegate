@@ -4,6 +4,7 @@
 namespace EuclidianAlgorithm
 {
     using System;
+    delegate int operation(int a, int b);
 
     /// <summary>
     /// The class implementing standard Euclidian and Stein algorithm.
@@ -144,10 +145,11 @@ namespace EuclidianAlgorithm
         {
             //// begin timer
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+            operation = GetSteinGcd;
             int gcd = pararray[0];
             for (int i = 1; i < pararray.Length; i++)
             {
-                gcd = GetSteinGcd(gcd, pararray[i]);
+                gcd = operation(gcd, pararray[i]);
             }
 
             elapsedMs1 = watch.ElapsedMilliseconds;
